@@ -1,0 +1,151 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="https://demos.telerik.com/kendo-ui/form/index?_ga=2.148574462.837794546.1694670997-1036273317.1694670997&_gl=1*y8lle0*_ga*MTAzNjI3MzMxNy4xNjk0NjcwOTk3*_ga_9JSNBCSF54*MTY5NDY4MTYxNC4yLjEuMTY5NDY4MjM1NC41OC4wLjA.">
+    <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
+    <title></title>
+    <link href="https://kendo.cdn.telerik.com/themes/6.7.0/default/default-main.css" rel="stylesheet" />
+    <script src="https://kendo.cdn.telerik.com/2023.2.829/js/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <script src="https://kendo.cdn.telerik.com/2023.2.829/js/kendo.all.min.js"></script>
+    
+    
+
+</head>
+<body>
+   <div id="bgcolor" class="col-6 m-auto">
+       <form method="get">
+            <h2 class="k-h4 k-mt-0 k-mb-4">Register Now</h2>
+
+            <div class="m">
+                <span class="k-d-inline-block">Name</span>
+                <input class="textbox" />
+            </div>
+            <div class="m">
+                <span class="k-d-inline-block">Email</span>
+                <input class="textbox " autocomplete="off" />
+            </div>
+
+
+            <div class="m">
+                <span class="k-d-inline-block">City</span>
+                <input id="kd-place-chooser" />
+            </div>
+            <div class="m">
+                <span class="k-d-inline-block">DOB</span>
+                <input id="datepicker" />
+            </div>
+            <div class="m">
+                <span class="k-d-inline-block"> Gender</span>
+                <br />
+                <input type="radio" name="engine" id="engine1" />
+                <input type="radio" name="engine" id="engine2" />
+            </div>
+            <div class="m">
+                <input type="checkbox" id="eq1" />
+            </div>
+            <div>
+               <button type="submit" class="btn btn-outline-light m-2">Submit </button>
+
+               
+                <input id="colorpicker" />
+                
+
+            </div>
+       </form>
+      
+       
+   </div>
+    <script>
+      
+      
+        $(document).ready(function () {
+
+            //-----------------textbox-----------------
+            $(".textbox").kendoTextBox({
+
+            });
+
+            //-----------------dropbox-----------------
+            var dataSource = new kendo.data.DataSource({
+                data: [
+                    { CityID: 1, CityName: "Bhopal" },
+                    { CityID: 2, CityName: "Indore" },
+                    { CityID: 3, CityName: "Jaipur" },
+                    { CityID: 4, CityName: "Pune" },
+                    { CityID: 5, CityName: "Banglore" },
+                    { CityID: 6, CityName: "Hydrabad" },
+                   
+                ],
+                sort: { field: "CityName", dir: "asc" }
+            });
+
+            $("#kd-place-chooser").kendoDropDownList({
+                filter: "contains",
+                optionLabel: 'Please select city...',
+                dataTextField: "CityName",
+                dataValueField: "CityID",
+                dataSource: dataSource
+            });
+            //-----------------checkbox-----------------
+            $('#eq1').kendoCheckBox({
+                checked: true,
+                label: "Terms and Condition"
+            });
+
+            //-----------------datepicker----------------
+            $("#datepicker").kendoDatePicker({
+                dateInput: true
+            });
+
+            // -----------------button-------------------
+            $("#Button").kendoButton({
+                themeColor: "primary"
+            });
+
+                // #d099de
+            // -----------------radio button--------------
+            $('#engine1').kendoRadioButton({
+                label: "MALE",
+                checked: true
+            })
+            $('#engine2').kendoRadioButton({
+                label: "FEMALE"
+            })
+            // -----------------color picker--------------
+            $("#colorpicker").kendoColorPicker({
+                value: "#ffffff",
+                buttons: true
+            });
+
+            function preview(e) {
+                var selectedColor = e.value;
+                $("#bgcolor").find("#colorpicker").each(function (i, el) {
+                    $(el).attr('fill', selectedColor);
+                })
+            }
+            
+               
+        });
+    </script>
+    <style>
+        #bgcolor{
+            background-color: #d099de;
+            color:white;
+            margin:3%;
+            padding:3%;
+            box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        .m{
+           margin-bottom:1%;
+        }
+    </style>
+
+</body>
+</html>
